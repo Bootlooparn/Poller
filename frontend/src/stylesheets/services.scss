@@ -1,0 +1,16 @@
+@import '../stylesheets/users.scss';
+
+$services-container-margin: 25px;
+$services-container-height: calc(100vh - 56px - #{$services-container-margin} - #{$users-container-height});
+
+#services-container {
+    height: $services-container-height;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: $services-container-margin;
+}
+
+#services-table {
+    width: 700px !important;
+}
