@@ -118,6 +118,24 @@ public class MainVerticle extends AbstractVerticle {
       ctx.response().end();
     });
 
+    router.route(HttpMethod.GET, "/services").handler(ctx -> {
+      String user = ctx.pathParam("user");
+
+      pool.query("select * from services").execute(r -> {
+        if (r.succeeded()) {
+          JsonArray array = new JsonArray();
+          RowSet<Row> rows = r.result();
+          for (Row row: rows) {
+            array.add(row.toJson());
+          }
+          ctx.json(array);
+        } else {
+          System.out.println("failed");
+          ctx.response().end();
+        }
+      });
+    });
+
     router.route(HttpMethod.GET, "/services/:user").handler(ctx -> {
       String user = ctx.pathParam("user");
 
